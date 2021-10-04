@@ -3,7 +3,7 @@
 //my apiKey = c4a186ac3a697bd2fb942f498b34386c
 var apiKey = "c4a186ac3a697bd2fb942f498b34386c";
 //grabbing text input box 
-searchInput = document.querySelector('#searchInput');
+var searchInput = document.querySelector('#searchInput');
 //query Url to call openWeather API with concatenated (value of text input search) and (apiKey) parameters
 var queryUrl = "http://api.openweathermap.org/data/2.5/weather?q="+"austin"+"&appid="+apiKey;
 
@@ -41,6 +41,11 @@ fetch(nationalParkUrl)
         latitude = callData.data[32].latitude;
         longitude = callData.data[32].longitude;
         let parkName = callData.data[32].fullName;
-        console.log(latitude, longitude, parkName);
-        console.log(callData.data.length);
+        // console.log(latitude, longitude, parkName);
+        // console.log(callData.data.length);
+        for(let i = 0; i < callData.data.length; i++) {
+            console.log(callData.data[i].fullName);
+            let liEl = document.createElement("li");
+            liEl.textContent = callData.data[i].fullName;
+        }
     });
