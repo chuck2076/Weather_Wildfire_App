@@ -7,11 +7,11 @@ var searchResults = document.querySelector("#searchResults");
 //query Url to call openWeather API with concatenated (value of text input search) and (apiKey) parameters
 var queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + "austin" + "&appid=" + apiKey;
 
-// fetch(queryUrl)
-//     .then (response => response.json())
-//     .then (data => console.log(data))
-// .catch(err => alert('Incorrect coordinates!'))
-// console.log(data);
+fetch(queryUrl)
+    .then (response => response.json())
+    .then (data => console.log(data))
+.catch(err => alert('Incorrect coordinates!'))
+console.log(data);
 
 // using nps api: https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=S3FQh2LolEVzZgRjcg7QskevKLZrUOfgYYhWZucF searching by state initials
 
