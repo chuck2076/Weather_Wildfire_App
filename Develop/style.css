@@ -53,11 +53,11 @@ h4 {
 }
 
 
-.submitBtn {
+.submit {
   border: 3px ridge #57504A;
   border-radius: 5px;
   padding: 5px;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: #BAD3F1;
   color: #57504A;
   font-size: 20px;
@@ -65,8 +65,8 @@ h4 {
   cursor: pointer;
 }
 
-.submitBtn:hover {
-  font-size: 25px;
+.submit:hover {
+  background-color: #6d8bb1;
   transition: all 0.3s ease-in-out;
 }
 
