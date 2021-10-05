@@ -18,7 +18,7 @@ var stateCode;
 
 var userInput;
 
-var nationalParkName = "Presidio of San Francisco";
+// var nationalParkName = "Presidio of San Francisco";
 
 let parkNameSelect = $("#parkNames");
 //openWeather APIKey
@@ -30,33 +30,23 @@ var nationalParkUrl;
 function openWeatherCall(latitude, longitude) {
     var openWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=alerts,hourly&appid=c4a186ac3a697bd2fb942f498b34386c`;
     fetch(openWeatherUrl)
-    .then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        console.log(data);
-        
-        let temp = data.current.temp;
-        let humidity = data.current.humidity;
-        let windSpeed = data.current.wind_speed;
-        let windGust = data.current.wind_gust;
-        //only found precip on the minutely status
-        let precip = data.minutely[0].precipitation;
+        .then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
 
-        //append data to designated html element here
-        console.log(temp,humidity,windSpeed,windGust,precip);
-        
-
-
+            let temp = data.current.temp;
+            let humidity = data.current.humidity;
+            let windSpeed = data.current.wind_speed;
+            let windGust = data.current.wind_gust;
+            //only found precip on the minutely status
+            let precip = data.minutely[0].precipitation;
 
             //append data to designated html element here
             console.log(temp, humidity, windSpeed, windGust, precip);
 
         });
 };
-var latitude;
-var longitude;
-var nationalParkApi = "S3FQh2LolEVzZgRjcg7QskevKLZrUOfgYYhWZucF";
-var stateCode = "CA";
 
 function stateHandler() {
     stateCode = $("#stateDD option:selected").text();
@@ -88,8 +78,8 @@ function apiParkName(stateCode) {
                 // append the names to drop down box here
                 let parkNameOption = $("<option>");
                 parkNameOption.text(callData.data[i].fullName);
-                console.log(parkNameOption);
-                console.log(parkNameSelect);
+                // console.log(parkNameOption);
+                // console.log(parkNameSelect);
                 parkNameSelect.append(parkNameOption);
             }
             // return nationalParkUrl
@@ -97,13 +87,14 @@ function apiParkName(stateCode) {
         })
 }
 
-function apiCallName(nationalParkUrl) {
+function apiCallName() {
     fetch(nationalParkUrl)
         .then(function (response) {
             return response.json();
         }).then(function (callData) {
             console.log("fetch call worked");
-            let userInput = selectEl.text();
+            let userInput = parkHandler();
+            // let userInput = selectEl.text();
             console.log(userInput);
             // console.log(latitude, longitude);
             console.log(callData.data.length);
@@ -120,7 +111,7 @@ function apiCallName(nationalParkUrl) {
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
             console.log(image);
             latitude = callData.data[i].latitude;
-            longitude = callData.data[i].latitude;
+            longitude = callData.data[i].longitude;
             console.log(latitude, longitude);
             // one call and wildfire call goes here passing the lat and long
             console.log("Out of the loop");
@@ -152,29 +143,11 @@ function wildfireCall(latitude, longitude) {
         });
 }
 
-
-
-
 function storeResults(parkName) {
     console.log(parkName);
     historyResults.push(parkName);
     localStorage.setItem("input", JSON.stringify(historyResults));
 }
-
-
-function appendSt() {
-    const stateDD = document.querySelector('#stateDD');
-    $('#stateDD option:not(:first)').remove();
-    for (i=0; i<stateCodes.length; i++) {
-        var createOption = document.createElement('option');
-        createOption.textContent = stateCodes[i];
-        stateDD.append(createOption)
-    }
-};
-var modalButton = document.querySelector(".modal-trigger");
-modalButton.addEventListener("click",appendSt);
-
-$(".modal-trigger").on("click", apiParkName);
 
 function parkHandler() {
     let userInput = $("#parkNames option:selected").text();
