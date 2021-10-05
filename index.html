@@ -36,23 +36,39 @@
           <label>Browser Select</label>
           <select class="browser-default" id="stateDD">
             <option value="" disabled selected>Choose your option</option>
-            
           </select>        
         </li>
         <li id = "searchBarPark">  
+
           <label>Browser Disabled</label>
-          <select class="browser-default" disabled>
+          <select class="browser-default" id="parkNames">
             <option value="" disabled selected>Choose your option</option>
-            <option value="1">Option 1</option>
+            <!-- <option value="1">Option 1</option>
             <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            <option value="3">Option 3</option> -->
           </select>
         </li>
-        <button class="submitBtn" type="submit" name="action">SUBMIT
-          <i class="material-icons right"></i>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action" id="submit">Submit
+          <i class="material-icons right">send</i>
+
         </button>
       </ul>
       </container>
+      <container> 
+        <div class = "col s12 m4 l3" id="pastSearches">
+        <h4>Past Searches:</h4>
+        <button class="submitBtn" type="menu" name = "park">Yosemite</button>
+        </div>
+      
+      <ul class ="col s12 m8 l9" id="infoBox">
+        <li class = "weather"></li>
+        <li class = "wind"></li>
+        <li class = "precip"></li>
+        <li class = "wildFire"></li>
+        
+      </ul>
+    </container>
   </body>
 
 

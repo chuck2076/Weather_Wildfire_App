@@ -1,9 +1,21 @@
-$(document).ready(function(){
+$(document).ready(function () {
     $('.modal').modal();
-  });
+});
 
 // var instance = M.Modal.getInstance('modal');
 // instance.open('modal');
+var stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID',
+    'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'
+];
+
+//openWeather API
+
+//openWeather APIKey
+//my apiKey = c4a186ac3a697bd2fb942f498b34386c
+
+var apiKey = "c4a186ac3a697bd2fb942f498b34386c";
+
 
 
 //openWeather OneCall data(temp, humidity, wind speed, wind gusts, precipitation) 
@@ -27,25 +39,37 @@ function openWeatherCall(latitude, longitude) {
     });
 };
 
-
-
 var latitude;
 var longitude;
 var nationalParkApi = "S3FQh2LolEVzZgRjcg7QskevKLZrUOfgYYhWZucF";
-// var stateCode = document.getElementById("#stateInput").value;
 var stateCode = "CA";
 
-// ${searchInput}
 
 var nationalParkUrl = `https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&api_key=${nationalParkApi}`;
 
-
-// var nationalParkName = document.getElementById("#parkNameInput");
 var nationalParkName = "Presidio of San Francisco";
 
-// function apiCallState() {
-//     fetch(nationalPark)
-// }
+let parkNameSelect = $("#parkNames");
+
+function apiParkName() {
+    fetch(nationalParkUrl)
+        .then(function (response) {
+            return response.json();
+        }).then(function (callData) {
+            
+            $('#parkNames option:not(:first)').remove();
+            for (let i = 0; i < callData.data.length; i++) {
+                console.log(callData.data[i].fullName);
+                // append the names to drop down box here
+                let parkNameOption = $("<option>");
+                    parkNameOption.text(callData.data[i].fullName);
+                    console.log(parkNameOption);
+                    console.log(parkNameSelect);
+                    parkNameSelect.append(parkNameOption);
+            }
+            $(".modal-content").on("click", "#submit", apiCallName);
+        })
+}
 
 
 function apiCallName() {
@@ -53,15 +77,15 @@ function apiCallName() {
         .then(function (response) {
             return response.json();
         }).then(function (callData) {
-            // console.log(latitude, longitude, parkName);
-            // console.log(callData.data.length);
+            console.log("fetch call worked");
+            let userInput = $("#parkNames option:selected").text();
+            console.log(userInput);
+            console.log(latitude, longitude,);
+            console.log(callData.data.length);
             let i = 0;
             for (i; i < callData.data.length; i++) {
                 console.log(callData.data[i].fullName);
-                // let liEl = document.createElement("button");
-                // liEl.textContent = callData.data[i].fullName;
-                // searchResults.append(liEl);
-                if (nationalParkName == callData.data[i].fullName) {
+                if (userInput == callData.data[i].fullName) {
                     console.log(i, "name matches!");
                     // console.log(callData.data[i].latitude, callData.data[i].longitude);
                     break;
@@ -79,8 +103,6 @@ function apiCallName() {
             openWeatherCall(latitude, longitude)
         });
 }
-
-
 
 function wildfireCall(latitude, longitude) {
 
@@ -104,6 +126,7 @@ function wildfireCall(latitude, longitude) {
 }
 
 
+
 var stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID',
     'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
     'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'
@@ -121,3 +144,8 @@ function appendSt() {
 };
 var modalButton = document.querySelector(".modal-trigger");
 modalButton.addEventListener("click",appendSt);
+
+$(".modal-trigger").on("click", apiParkName);
+
+
+
