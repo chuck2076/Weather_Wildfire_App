@@ -4,12 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
@@ -33,16 +28,16 @@
       <ul class = "modal-content">
         <h4 id = "modal-header">Search National Parks By State</h4>
         <li id = "searchBarState">
-          <label>Browser Select</label>
+          <label>Choose Your State</label>
           <select class="browser-default" id="stateDD">
-            <option value="" disabled selected>Choose your option</option>
+            <option value="" disabled selected>"CA"</option>
           </select>        
         </li>
         <li id = "searchBarPark">  
 
-          <label>Browser Disabled</label>
+          <label>Choose Your Park</label>
           <select class="browser-default" id="parkNames">
-            <option value="" disabled selected>Choose your option</option>
+            <option value="" disabled selected>"Yosemite"</option>
             <!-- <option value="1">Option 1</option>
             <option value="2">Option 2</option>
             <option value="3">Option 3</option> -->
@@ -50,7 +45,7 @@
         </li>
 
         <button class= "submitBtn" type="submit" name="action" id="submitBtn">Submit
-          <i class="material-icons right"></i>
+          
 
         </button>
       </ul>
