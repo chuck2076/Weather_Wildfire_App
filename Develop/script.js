@@ -26,6 +26,7 @@ function openWeatherCall(latitude, longitude) {
         return response.json();
     }).then(function(data) {
         console.log(data);
+        
         let temp = data.current.temp;
         let humidity = data.current.humidity;
         let windSpeed = data.current.wind_speed;
@@ -136,6 +137,7 @@ var stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'G
 
 function appendSt() {
     const stateDD = document.querySelector('#stateDD');
+    $('#stateDD option:not(:first)').remove();
     for (i=0; i<stateCodes.length; i++) {
         var createOption = document.createElement('option');
         createOption.textContent = stateCodes[i];
