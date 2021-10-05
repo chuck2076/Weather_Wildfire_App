@@ -22,27 +22,34 @@
     <div class = "hero-text">NPS Daily Weather and Fire Tracker</div>
   </header>
 
-  <body>
-    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-    <container id="modal1" class="modal">
-      <ul class = "modal-content">
-        <h4 id = "modal-header">Search National Parks By State</h4>
-        <li id = "searchBarState">
-          <label>Choose Your State</label>
-          <select class="browser-default" id="stateDD">
-            <option value="" disabled selected>"CA"</option>
-          </select>        
-        </li>
-        <li id = "searchBarPark">  
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+  <container id="modal1" class="modal">
+    <ul class="modal-content">
+      <h4 id="modal-header">Search National Parks By State</h4>
+      <li id="searchBarState">
+        <label>Browser Select</label>
+        <select class="browser-default" id="stateDD">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+      </li>
+      <li id="searchBarPark">
 
-          <label>Choose Your Park</label>
-          <select class="browser-default" id="parkNames">
-            <option value="" disabled selected>"Yosemite"</option>
-            <!-- <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option> -->
-          </select>
-        </li>
+        <label>Browser Disabled</label>
+        <select class="browser-default" id="parkNames">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+      </li>
+
+      <button class="btn waves-effect waves-light" type="submit" name="action" id="submit">
+        <i class="material-icons right">send</i>
+      </button>
+    </ul>
+  </container>
+  <container>
+    <div class="col s12 m4 l3" id="pastSearches">
+      <h4>Past Searches:</h4>
+      <button class="submitBtn" type="menu" name="park">Yosemite</button>
+    </div>
 
         <button class= "submitBtn" type="submit" name="action" id="submitBtn">Submit
           
@@ -69,9 +76,9 @@
   </body>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="./Develop/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./Develop/script.js"></script>
 
 </html>

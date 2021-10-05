@@ -18,7 +18,7 @@ var stateCode;
 
 var userInput;
 
-var nationalParkName = "Presidio of San Francisco";
+// var nationalParkName = "Presidio of San Francisco";
 
 let parkNameSelect = $("#parkNames");
 //openWeather APIKey
@@ -34,6 +34,7 @@ function openWeatherCall(latitude, longitude) {
             return response.json();
         }).then(function (data) {
             console.log(data);
+
             let temp = data.current.temp;
             let humidity = data.current.humidity;
             let windSpeed = data.current.wind_speed;
@@ -77,8 +78,8 @@ function apiParkName(stateCode) {
                 // append the names to drop down box here
                 let parkNameOption = $("<option>");
                 parkNameOption.text(callData.data[i].fullName);
-                console.log(parkNameOption);
-                console.log(parkNameSelect);
+                // console.log(parkNameOption);
+                // console.log(parkNameSelect);
                 parkNameSelect.append(parkNameOption);
             }
             // return nationalParkUrl
@@ -86,13 +87,14 @@ function apiParkName(stateCode) {
         })
 }
 
-function apiCallName(nationalParkUrl) {
+function apiCallName() {
     fetch(nationalParkUrl)
         .then(function (response) {
             return response.json();
         }).then(function (callData) {
             console.log("fetch call worked");
-            let userInput = selectEl.text();
+            let userInput = parkHandler();
+            // let userInput = selectEl.text();
             console.log(userInput);
             // console.log(latitude, longitude);
             console.log(callData.data.length);
@@ -109,7 +111,7 @@ function apiCallName(nationalParkUrl) {
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
             console.log(image);
             latitude = callData.data[i].latitude;
-            longitude = callData.data[i].latitude;
+            longitude = callData.data[i].longitude;
             console.log(latitude, longitude);
             // one call and wildfire call goes here passing the lat and long
             console.log("Out of the loop");
@@ -141,16 +143,11 @@ function wildfireCall(latitude, longitude) {
         });
 }
 
-
-
-
 function storeResults(parkName) {
     console.log(parkName);
     historyResults.push(parkName);
     localStorage.setItem("input", JSON.stringify(historyResults));
 }
-
-
 
 function parkHandler() {
     let userInput = $("#parkNames option:selected").text();
