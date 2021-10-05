@@ -15,17 +15,12 @@ var stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'G
 //my apiKey = c4a186ac3a697bd2fb942f498b34386c
 
 var apiKey = "c4a186ac3a697bd2fb942f498b34386c";
-//grabbing text input box 
-var searchInput = document.querySelector('#searchInput');
-var searchResults = document.querySelector("#searchResults");
-//query Url to call openWeather API with concatenated (value of text input search) and (apiKey) parameters
-var queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + "austin" + "&appid=" + apiKey;
 
-//need to add longitude and latitude variables into url when ready
-var openWeatherUrl ="https://api.openweathermap.org/data/2.5/onecall?lat=37.84883288&lon=-119.5571873&units=imperial&exclude={minutely,alerts,hourly}&appid=c4a186ac3a697bd2fb942f498b34386c"; 
+
 
 //openWeather OneCall data(temp, humidity, wind speed, wind gusts, precipitation) 
-function openWeatherCall() {
+function openWeatherCall(latitude, longitude) {
+    var openWeatherUrl =`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lng=${longitude}&units=imperial&exclude={alerts,hourly}&appid=c4a186ac3a697bd2fb942f498b34386c`;
     fetch(openWeatherUrl)
     .then(function(response) {
         return response.json();
@@ -39,11 +34,10 @@ function openWeatherCall() {
         let precip = data.minutely[0].precipitation;
 
         //append data to designated html element here
-        
         console.log(temp,humidity,windSpeed,windGust,precip);
+        
     });
 };
-openWeatherCall();
 
 var latitude;
 var longitude;
@@ -106,6 +100,7 @@ function apiCallName() {
             console.log("Out of the loop");
             // console.log(latitude, longitude, i);
             wildfireCall(latitude, longitude);
+            openWeatherCall(latitude, longitude)
         });
 }
 
@@ -131,6 +126,26 @@ function wildfireCall(latitude, longitude) {
 }
 
 
+
+var stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID',
+    'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'
+];
+
+
+
+function appendSt() {
+    const stateDD = document.querySelector('#stateDD');
+    for (i=0; i<stateCodes.length; i++) {
+        var createOption = document.createElement('option');
+        createOption.textContent = stateCodes[i];
+        stateDD.append(createOption)
+    }
+};
+var modalButton = document.querySelector(".modal-trigger");
+modalButton.addEventListener("click",appendSt);
+
 $(".modal-trigger").on("click", apiParkName);
+
 
 
