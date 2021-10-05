@@ -44,10 +44,21 @@ body {
 
 }
 
+#past {
+  border: 1px solid black;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+h4 {
+  border-bottom: solid lightgrey;
+}
+
+
 .submitBtn {
   border: 1px solid black;
   border-radius: 15px;
-  margin-top: 15px;
+  margin-top: 20px;
   background-color: #BAD3F1;
   color: black;
 }
@@ -57,3 +68,15 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+#infoBox {
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+
+}
+
+.li1 {
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+  margin-left: 5px;
+  margin-right: 5px;
+}
