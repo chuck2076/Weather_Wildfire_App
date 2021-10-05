@@ -10,12 +10,40 @@ var stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'G
 ];
 
 //openWeather API
+
+//openWeather APIKey
+//my apiKey = c4a186ac3a697bd2fb942f498b34386c
+
 var apiKey = "c4a186ac3a697bd2fb942f498b34386c";
 //grabbing text input box 
 var searchInput = document.querySelector('#searchInput');
 var searchResults = document.querySelector("#searchResults");
 //query Url to call openWeather API with concatenated (value of text input search) and (apiKey) parameters
 var queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + "austin" + "&appid=" + apiKey;
+
+//need to add longitude and latitude variables into url when ready
+var openWeatherUrl ="https://api.openweathermap.org/data/2.5/onecall?lat=37.84883288&lon=-119.5571873&units=imperial&exclude={minutely,alerts,hourly}&appid=c4a186ac3a697bd2fb942f498b34386c"; 
+
+//openWeather OneCall data(temp, humidity, wind speed, wind gusts, precipitation) 
+function openWeatherCall() {
+    fetch(openWeatherUrl)
+    .then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        console.log(data);
+        let temp = data.current.temp;
+        let humidity = data.current.humidity;
+        let windSpeed = data.current.wind_speed;
+        let windGust = data.current.wind_gust;
+        //only found precip on the minutely status
+        let precip = data.minutely[0].precipitation;
+
+        //append data to designated html element here
+        
+        console.log(temp,humidity,windSpeed,windGust,precip);
+    });
+};
+openWeatherCall();
 
 var latitude;
 var longitude;
@@ -102,4 +130,7 @@ function wildfireCall(latitude, longitude) {
         });
 }
 
+
 $(".modal-trigger").on("click", apiParkName);
+
+

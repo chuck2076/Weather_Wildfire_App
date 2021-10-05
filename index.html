@@ -11,7 +11,9 @@
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" 
     />
@@ -31,7 +33,7 @@
       <ul class = "modal-content">
         <h4 id = "modal-header">Search National Parks By State</h4>
         <li id = "searchBarState">
-          <label>Browser Select</label>
+          <label>searchBarState</label>
           <select class="browser-default">
             <option value="" disabled selected>Choose your option</option>
             <!-- <option value="1">Option 1</option>
@@ -40,6 +42,7 @@
           </select>        
         </li>
         <li id = "searchBarPark">  
+
           <label>Browser Disabled</label>
           <select class="browser-default" id="parkNames">
             <option value="" disabled selected>Choose your option</option>
@@ -48,11 +51,27 @@
             <option value="3">Option 3</option> -->
           </select>
         </li>
+
         <button class="btn waves-effect waves-light" type="submit" name="action" id="submit">Submit
           <i class="material-icons right">send</i>
+
         </button>
       </ul>
       </container>
+      <container> 
+        <div class = "col s12 m4 l3" id="pastSearches">
+        <h4>Past Searches:</h4>
+        <button class="submitBtn" type="menu" name = "park">Yosemite</button>
+        </div>
+      
+      <ul class ="col s12 m8 l9" id="infoBox">
+        <li class = "weather"></li>
+        <li class = "wind"></li>
+        <li class = "precip"></li>
+        <li class = "wildFire"></li>
+        
+      </ul>
+    </container>
   </body>
 
 
