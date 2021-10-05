@@ -1,3 +1,11 @@
+$(document).ready(function(){
+    $('.modal').modal();
+  });
+
+// var instance = M.Modal.getInstance('modal');
+// instance.open('modal');
+
+
 //openWeather API
 //my apiKey = c4a186ac3a697bd2fb942f498b34386c
 var apiKey = "c4a186ac3a697bd2fb942f498b34386c";

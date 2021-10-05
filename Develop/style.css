@@ -1,0 +1,40 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1;
+  }
+  
+  textarea {
+    background: transparent;
+    border: none;
+    resize: none;
+    color: #000000;
+    border-left: 1px solid black;
+    padding: 10px;
+  }
+
+  .hero-image {
+    display: flexbox;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    height: 500px;
+    background: transparent;
+    background-image: url("https://i1.wp.com/atascaderonews.com/wp-content/uploads/National-Parks-Service-Yosemite.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius: 0;
+    border-bottom: 2px solid black;
+  }
+
+.hero-text{
+    text-align: right;
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000;
+    font-size: 50px;
+}
+  
