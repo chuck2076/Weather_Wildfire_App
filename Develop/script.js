@@ -30,22 +30,33 @@ var nationalParkUrl;
 function openWeatherCall(latitude, longitude) {
     var openWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=alerts,hourly&appid=c4a186ac3a697bd2fb942f498b34386c`;
     fetch(openWeatherUrl)
-        .then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            console.log(data);
-            let temp = data.current.temp;
-            let humidity = data.current.humidity;
-            let windSpeed = data.current.wind_speed;
-            let windGust = data.current.wind_gust;
-            //only found precip on the minutely status
-            let precip = data.minutely[0].precipitation;
+    .then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        console.log(data);
+        
+        let temp = data.current.temp;
+        let humidity = data.current.humidity;
+        let windSpeed = data.current.wind_speed;
+        let windGust = data.current.wind_gust;
+        //only found precip on the minutely status
+        let precip = data.minutely[0].precipitation;
+
+        //append data to designated html element here
+        console.log(temp,humidity,windSpeed,windGust,precip);
+        
+
+
 
             //append data to designated html element here
             console.log(temp, humidity, windSpeed, windGust, precip);
 
         });
 };
+var latitude;
+var longitude;
+var nationalParkApi = "S3FQh2LolEVzZgRjcg7QskevKLZrUOfgYYhWZucF";
+var stateCode = "CA";
 
 function stateHandler() {
     stateCode = $("#stateDD option:selected").text();
@@ -151,6 +162,19 @@ function storeResults(parkName) {
 }
 
 
+function appendSt() {
+    const stateDD = document.querySelector('#stateDD');
+    $('#stateDD option:not(:first)').remove();
+    for (i=0; i<stateCodes.length; i++) {
+        var createOption = document.createElement('option');
+        createOption.textContent = stateCodes[i];
+        stateDD.append(createOption)
+    }
+};
+var modalButton = document.querySelector(".modal-trigger");
+modalButton.addEventListener("click",appendSt);
+
+$(".modal-trigger").on("click", apiParkName);
 
 function parkHandler() {
     let userInput = $("#parkNames option:selected").text();
