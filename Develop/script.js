@@ -1,6 +1,11 @@
-$(document).ready(function () {
-    $('.modal').modal();
-});
+// $(document).ready(function () {
+//     $('.modal').modal();
+// });
+
+$(document).ready(function(){
+    $('#modal1').modal();
+    $('#modal1').modal('open'); 
+ });
 
 // var instance = M.Modal.getInstance('modal');
 // instance.open('modal');

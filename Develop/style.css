@@ -39,6 +39,9 @@ body {
     font-size: 60px;
 }
 
+.modal-trigger{
+  display: none;
+}
 
 #past {
   border: 1px solid #57504A;
