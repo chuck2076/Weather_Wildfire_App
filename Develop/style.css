@@ -1,47 +1,47 @@
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 16px;
-    line-height: 1;
-  }
-  
-  textarea {
-    background: transparent;
-    border: none;
-    resize: none;
-    color: #000000;
-    border-left: 1px solid black;
-    padding: 10px;
-  }
-
-  .hero-image {
-    display: flex;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    margin-bottom: 10px;
-    height: 500px;
-    background: transparent;
-    background-image: url("https://i1.wp.com/atascaderonews.com/wp-content/uploads/National-Parks-Service-Yosemite.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    border-radius: 0;
-    border-bottom: 2px solid #57504A;
-  }
-
-.hero-text{
-    text-align: right;
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    color: #87adda;
-    text-shadow: 3px 3px #57504A;
-    font-size: 60px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  line-height: 1;
 }
 
-.modal-trigger{
+textarea {
+  background: transparent;
+  border: none;
+  resize: none;
+  color: #000000;
+  border-left: 1px solid black;
+  padding: 10px;
+}
+
+.hero-image {
+  display: flex;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin-bottom: 10px;
+  height: 500px;
+  background: transparent;
+  background-image: url("https://i1.wp.com/atascaderonews.com/wp-content/uploads/National-Parks-Service-Yosemite.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 0;
+  border-bottom: 2px solid #57504A;
+}
+
+.hero-text {
+  text-align: right;
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  color: #87adda;
+  text-shadow: 3px 3px #57504A;
+  font-size: 60px;
+}
+
+/* .modal-trigger{
   display: none;
-}
+} */
 
 #past {
   border: 1px solid #57504A;
@@ -76,7 +76,7 @@ h4 {
 }
 
 #infoBox {
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, .5);
   color: #fff;
 
 }
@@ -84,9 +84,15 @@ h4 {
 
 .li1 {
   display: inline-flex;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, .5);
   color: #fff;
   margin-left: 5px;
   margin-right: 5px;
   align-content: flex-end;
+}
+
+.rowBox {
+  /* display: flex; */
+  height: 100vh;
+  background-size: cover;
 }
