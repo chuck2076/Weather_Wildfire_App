@@ -147,3 +147,7 @@ h5 {
   height: 100vh;
   background-size: cover;
 }
+
+li {
+  list-style-type: none;
+}

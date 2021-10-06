@@ -1,14 +1,8 @@
-// $(document).ready(function () {
-//     $('.modal').modal();
-// });
-
 $(document).ready(function () {
     $('#modal1').modal();
     $('#modal1').modal('open');
 });
 
-// var instance = M.Modal.getInstance('modal');
-// instance.open('modal');
 var modalButton = document.querySelector(".modal-trigger");
 var stateCodes = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID',
     'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
@@ -24,8 +18,6 @@ var parkCode = [];
 
 var userInput;
 
-// var nationalParkName = "Presidio of San Francisco";
-
 let parkNameSelect = $("#parkNames");
 //openWeather APIKey
 var apiKey = "c4a186ac3a697bd2fb942f498b34386c";
@@ -39,13 +31,16 @@ function openWeatherCall(latitude, longitude) {
         .then(function (response) {
             return response.json();
         }).then(function (data) {
-            console.log(data);
-            $("#weather").empty();
-            $("#wind").empty();
-            $("#precip").empty();
-            $("#weather").text("Weather");
-            $("#wind").text("Wind");
-            $("#precip").text("Precipitation");
+            // console.log(data);
+            if($("#weather").children("li").length > 0) {
+                $("#weather").children("li").remove();
+            }
+            if($("#wind").children("li").length > 0) {
+                $("#wind").chidlren("li").remove();
+            }
+            if($("#precip").children("li").length > 0) {
+                $("#precip").children("li").length > 0;
+            }
             let temp = data.current.temp;
             let humidity = data.current.humidity;
             let windSpeed = data.current.wind_speed;
@@ -68,8 +63,6 @@ function openWeatherCall(latitude, longitude) {
             $("#wind").append(windSpeedEl);
             $("#wind").append(windGustEl);
             $("#precip").append(precipEl);
-            // console.log(precip);
-            console.log(temp, humidity, windSpeed, windGust, precip);
         });
 };
 
@@ -92,22 +85,17 @@ function appendSt() {
 function apiParkName(stateCode) {
     console.log("getting park names to populate dropdown");
     nationalParkUrl = `https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&api_key=${nationalParkApi}`;
-    console.log(nationalParkUrl);
     fetch(nationalParkUrl)
         .then(function (response) {
             return response.json();
         }).then(function (callData) {
             $('#parkNames option:not(:first)').remove();
             for (let i = 0; i < callData.data.length; i++) {
-                // console.log(callData.data[i].fullName);
                 // append the names to drop down box here
                 let parkNameOption = $("<option>");
                 parkNameOption.text(callData.data[i].fullName);
-                // console.log(parkNameOption);
-                // console.log(parkNameSelect);
                 parkNameSelect.append(parkNameOption);
             }
-            // return nationalParkUrl
             $(".modal-content").on("click", "#submit", apiCallName);
         })
 }
@@ -119,21 +107,14 @@ function apiCallName() {
         }).then(function (callData) {
             console.log("fetch call worked");
             let userInput = parkHandler();
-            // let userInput = selectEl.text();
-            console.log(userInput);
-            // console.log(latitude, longitude);
+            // console.log(userInput);
             console.log(callData.data.length);
             let i = 0;
             for (i; i < callData.data.length; i++) {
-                // console.log(callData.data[i].fullName);
                 if (userInput == callData.data[i].fullName) {
-                    console.log(i, "name matches!");
-                    // console.log(callData.data[i].latitude, callData.data[i].longitude);
                     break;
                 }
             }
-
-            console.log(callData.data[i].images);
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
             console.log(image);
             $(".rowBox").css("background-image", "url(" + image + ")");
@@ -141,12 +122,9 @@ function apiCallName() {
             $(".rowBox").css("z-index", 0);
             latitude = callData.data[i].latitude;
             longitude = callData.data[i].longitude;
-            // console.log(latitude, longitude);
-            // one call and wildfire call goes here passing the lat and long
-            console.log("Out of the loop");
             let code = callData.data[i].parkCode
             storeResults(userInput, code);
-            // console.log(latitude, longitude, i);
+            // one call and wildfire call goes here passing the lat and long
             wildfireCall(latitude, longitude);
             openWeatherCall(latitude, longitude);
         });
@@ -163,7 +141,6 @@ function wildfireCall(latitude, longitude) {
             }
         })
         .then(response => {
-            // console.log(response);
             return response.json();
         }).then(function (data) {
             console.log(data);
@@ -172,7 +149,7 @@ function wildfireCall(latitude, longitude) {
             $("#wildFire").text("Wildfire");
             let wildfireEl = $("<li>");
             if (data.message !== "No fires were detected") {
-                wildfireEl.text("Confidence" + data.data[0].confidence);
+                wildfireEl.text("Confidence: " + data.data[0].confidence);
                 $("#wildFire").append(wildfireEl);
             } else {
                 wildfireEl.text(data.message);
@@ -186,8 +163,6 @@ function wildfireCall(latitude, longitude) {
 }
 
 function storeResults(parkName, code) {
-    console.log("Storing");
-    // console.log(parkName);
     historyResults.push(parkName);
     parkCode.push(code);
     localStorage.setItem("input", JSON.stringify(historyResults));
@@ -198,13 +173,14 @@ function storeResults(parkName, code) {
 function getResults() {
     $(".historyBtn").remove();
     parkCode = JSON.parse(localStorage.getItem("code"));
+    let historySearches = JSON.parse(localStorage.getItem("input"));
     if (parkCode !== null) {
         for (let i = 0; i < parkCode.length; i++) {
             let historyBtn = $("<button>");
             historyBtn.attr("class", "historyBtn");
             historyBtn.addClass("submit");
-            historyBtn.text(parkCode[i]);
-            // historyBtn.text(parkCode[i]);
+            historyBtn.attr("id", parkCode[i]);
+            historyBtn.text(historySearches[i]);
             $(".pastSearches").append(historyBtn);
         }
         $(".historyBtn").on("click", historyHandler);
@@ -214,9 +190,8 @@ function getResults() {
 }
 
 function historyHandler() {
-    console.log($(this));
-    parkCode = $(this).text();
-    // console.log(parkName);
+    // console.log($(this));
+    parkCode = $(this).attr("id");
     var historyUrl = `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${nationalParkApi}`;
     historyFetch(historyUrl);
 }
@@ -229,22 +204,17 @@ function historyFetch(historyUrl) {
         }).then(function (callData) {
             console.log("fetch call worked");
             let userInput = callData.data[0].fullName;
-            // let userInput = selectEl.text();
             console.log(userInput);
-            // console.log(latitude, longitude);
             console.log(callData.data.length);
             let i = 0;
             for (i; i < callData.data.length; i++) {
                 console.log(callData.data[i].fullName);
                 if (userInput == callData.data[i].fullName) {
                     console.log(i, "name matches!");
-                    // console.log(callData.data[i].latitude, callData.data[i].longitude);
                     break;
                 }
             }
-            // console.log(callData.data[i].images);
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
-            // console.log(image);
             $(".rowBox").css("background-image", "url(" + image + ")");
             $(".rowBox").css("position", "relative");
             $(".rowBox").css("z-index", 0);
@@ -252,9 +222,6 @@ function historyFetch(historyUrl) {
             longitude = callData.data[i].longitude;
             console.log(latitude, longitude);
             // one call and wildfire call goes here passing the lat and long
-            console.log("Out of the loop");
-            // storeResults(userInput);
-            // console.log(latitude, longitude, i);
             wildfireCall(latitude, longitude);
             openWeatherCall(latitude, longitude);
         });
