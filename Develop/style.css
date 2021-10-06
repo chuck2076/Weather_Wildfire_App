@@ -32,39 +32,41 @@ body {
     text-align: right;
     position: absolute;
     top: 50%;
-    left: 80%;
+    left: 70%;
     transform: translate(-50%, -50%);
     color: #87adda;
-    text-shadow: 2px 2px #000;
-    font-size: 50px;
+    text-shadow: 3px 3px #57504A;
+    font-size: 60px;
 }
 
-.submitBtn {
-  background-color: #BAD3F1;
-
-}
 
 #past {
-  border: 1px solid black;
+  border: 1px solid #57504A;
+  box-shadow: 10px 10px 5px -5px #A08375;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 10px;
+  color: #57504A;
 }
 
 h4 {
-  border-bottom: solid lightgrey;
+  border-bottom: solid #A08375;
 }
 
 
-.submitBtn {
-  border: 1px solid black;
-  border-radius: 15px;
-  margin-top: 20px;
+.submit {
+  border: 3px ridge #57504A;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
   background-color: #BAD3F1;
-  color: black;
+  color: #57504A;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.submitBtn:hover {
-  font-size: 20px;
+.submit:hover {
+  background-color: #6d8bb1;
   transition: all 0.3s ease-in-out;
 }
 
