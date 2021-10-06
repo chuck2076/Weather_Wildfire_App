@@ -2,10 +2,10 @@
 //     $('.modal').modal();
 // });
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('#modal1').modal();
-    $('#modal1').modal('open'); 
- });
+    $('#modal1').modal('open');
+});
 
 // var instance = M.Modal.getInstance('modal');
 // instance.open('modal');
@@ -20,6 +20,7 @@ var latitude;
 var longitude;
 var nationalParkApi = "S3FQh2LolEVzZgRjcg7QskevKLZrUOfgYYhWZucF";
 var stateCode;
+var parkCode = [];
 
 var userInput;
 
@@ -42,11 +43,15 @@ function openWeatherCall(latitude, longitude) {
             $("#weather").empty();
             $("#wind").empty();
             $("#precip").empty();
+            $("#weather").text("Weather");
+            $("#wind").text("Wind");
+            $("#precip").text("Precipitation");
             let temp = data.current.temp;
             let humidity = data.current.humidity;
             let windSpeed = data.current.wind_speed;
             let windGust = data.current.wind_gust;
             //only found precip on the minutely status
+            console.log(data.minutely.length)
             let precip = data.minutely[0].precipitation;
             //append data to designated html element here
             let tempEl = $("<li>");
@@ -79,7 +84,7 @@ function appendSt() {
     for (i = 0; i < stateCodes.length; i++) {
         var createOption = document.createElement('option');
         createOption.textContent = stateCodes[i];
-        stateDD.append(createOption)
+        stateDD.append(createOption);
     }
     stateDD.addEventListener("change", stateHandler);
 };
@@ -120,22 +125,27 @@ function apiCallName() {
             console.log(callData.data.length);
             let i = 0;
             for (i; i < callData.data.length; i++) {
-                console.log(callData.data[i].fullName);
+                // console.log(callData.data[i].fullName);
                 if (userInput == callData.data[i].fullName) {
                     console.log(i, "name matches!");
                     // console.log(callData.data[i].latitude, callData.data[i].longitude);
                     break;
                 }
             }
+
             console.log(callData.data[i].images);
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
             console.log(image);
+            $(".rowBox").css("background-image", "url(" + image + ")");
+            $(".rowBox").css("position", "relative");
+            $(".rowBox").css("z-index", 0);
             latitude = callData.data[i].latitude;
             longitude = callData.data[i].longitude;
-            console.log(latitude, longitude);
+            // console.log(latitude, longitude);
             // one call and wildfire call goes here passing the lat and long
             console.log("Out of the loop");
-            storeResults(userInput);
+            let code = callData.data[i].parkCode
+            storeResults(userInput, code);
             // console.log(latitude, longitude, i);
             wildfireCall(latitude, longitude);
             openWeatherCall(latitude, longitude);
@@ -158,9 +168,11 @@ function wildfireCall(latitude, longitude) {
         }).then(function (data) {
             console.log(data);
             console.log(data.message);
+            $("#wildFire").empty();
+            $("#wildFire").text("Wildfire");
             let wildfireEl = $("<li>");
             if (data.message !== "No fires were detected") {
-                wildfireEl.text(data.data.confidence);
+                wildfireEl.text("Confidence" + data.data[0].confidence);
                 $("#wildFire").append(wildfireEl);
             } else {
                 wildfireEl.text(data.message);
@@ -173,43 +185,50 @@ function wildfireCall(latitude, longitude) {
         });
 }
 
-function storeResults(parkName) {
-    console.log(parkName);
+function storeResults(parkName, code) {
+    console.log("Storing");
+    // console.log(parkName);
     historyResults.push(parkName);
+    parkCode.push(code);
     localStorage.setItem("input", JSON.stringify(historyResults));
+    localStorage.setItem("code", JSON.stringify(parkCode));
+    return;
 }
 
 function getResults() {
-    $("#historyBtn").remove();
-    historyResults = JSON.parse(localStorage.getItem("input"));
-    if(historyResults !== null) {
-        for(let i = 0; i < historyResults.length; i++) {
+    $(".historyBtn").remove();
+    parkCode = JSON.parse(localStorage.getItem("code"));
+    if (historyResults !== null) {
+        for (let i = 0; i < parkCode.length; i++) {
             let historyBtn = $("<button>");
             historyBtn.attr("class", "historyBtn");
             historyBtn.addClass("submit");
-            historyBtn.text(historyResults[i]);
+            historyBtn.text(parkCode[i]);
+            // historyBtn.text(parkCode[i]);
             $(".pastSearches").append(historyBtn);
-        } 
+        }
         $(".historyBtn").on("click", historyHandler);
     } else {
-        return historyResults = [];
+        return parkCode = [];
     }
 }
 
-function historyHandler () {
+function historyHandler() {
     console.log($(this));
-    parkName = $(this).text();
-    var historyUrl = `https://developer.nps.gov/api/v1/parks?q=${parkName}&api_key=${nationalParkApi}`;
-    historyFetch(parkName, historyUrl);
+    parkCode = $(this).text();
+    // console.log(parkName);
+    var historyUrl = `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${nationalParkApi}`;
+    historyFetch(historyUrl);
 }
 
-function historyFetch(parkName, historyUrl) {
+function historyFetch(historyUrl) {
+    console.log("history fetch");
     fetch(historyUrl)
         .then(function (response) {
             return response.json();
         }).then(function (callData) {
             console.log("fetch call worked");
-            let userInput = parkName
+            let userInput = callData.data[0].fullName;
             // let userInput = selectEl.text();
             console.log(userInput);
             // console.log(latitude, longitude);
@@ -223,15 +242,18 @@ function historyFetch(parkName, historyUrl) {
                     break;
                 }
             }
-            console.log(callData.data[i].images);
+            // console.log(callData.data[i].images);
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
-            console.log(image);
+            // console.log(image);
+            $(".rowBox").css("background-image", "url(" + image + ")");
+            $(".rowBox").css("position", "relative");
+            $(".rowBox").css("z-index", 0);
             latitude = callData.data[i].latitude;
             longitude = callData.data[i].longitude;
             console.log(latitude, longitude);
             // one call and wildfire call goes here passing the lat and long
             console.log("Out of the loop");
-            storeResults(userInput);
+            // storeResults(userInput);
             // console.log(latitude, longitude, i);
             wildfireCall(latitude, longitude);
             openWeatherCall(latitude, longitude);
@@ -244,4 +266,4 @@ function parkHandler() {
 }
 
 getResults();
-modalButton.addEventListener("click", appendSt);
+appendSt();
