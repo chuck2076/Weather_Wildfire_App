@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
   <!--Import materialize.css-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
@@ -26,7 +26,7 @@
     <div class="hero-text">NPS Daily Weather and Fire Tracker</div>
   </header>
 
-  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Search</a>
+ 
   <div id="modal1" class="modal">
     <ul class="modal-content">
       <h4 id="modal-header">Search National Parks By State</h4>
@@ -42,8 +42,9 @@
           <option value="" disabled selected>"Yosemite"</option>
         </select>
       </li>
-      <button class="submit" type="submit" name="action" id="submit">Submit
+      <button class="submit" type="submit" name="action" id="submit">SEARCH
       </button>
+
     </ul>
   </div>
 
@@ -54,16 +55,16 @@
       <div class="pastSearches">
         <h4>Past Searches</h4>
         <!-- <button class="submit" type="menu" name = "park">Yosemite</button> -->
+        <a class="btn modal-trigger" href="#modal1">New Park</a>
       </div>
     </div>
 
     <!--<ul class ="col s4 m4 l4" id="infoBox">-->
-
-
-    <div id="weather" class="col s6 m3 l2 li1">Weather</div>
-    <div id="wind" class="col s6 m3 l2 li1">Wind</div>
-    <div id="precip" class="col s6 m3 l2 li1">Precipitation</div>
-    <div id="wildFire" class="col s6 m3 l2 li1">Wildfire Danger</div>
+    <div class="parkName"></div>
+    <div id="weather" class="col s6 m3 l2 li1"><h5>Weather</h5></div>
+    <div id="wind" class="col s6 m3 l2 li1"><h5>Wind</h5></div>
+    <div id="precip" class="col s6 m3 l2 li1"><h5>Precipitation</h5></div>
+    <div id="wildFire" class="col s6 m3 l2 li1"><h5>Wildfire Danger</h5></div>
 
 
   </div>
