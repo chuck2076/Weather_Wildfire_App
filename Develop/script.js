@@ -41,10 +41,22 @@ function openWeatherCall(latitude, longitude) {
             let windGust = data.current.wind_gust;
             //only found precip on the minutely status
             let precip = data.minutely[0].precipitation;
-
             //append data to designated html element here
-            console.log(temp, humidity, windSpeed, windGust, precip);
-
+            let tempEl = $("<li>");
+            tempEl.text("Temperature: " + temp + String.fromCharCode(176) + "F");
+            let humidityEl = $("<li>");
+            humidityEl.text("Humidity: " + humidity + "%");
+            let windSpeedEl = $("<li>");
+            windSpeedEl.text("Wind Speed: " + windSpeed + " MPH");
+            let windGustEl = $("<li>");
+            windGustEl.text("Wind Gust: " + windGust);
+            let precipEl = $("<li>");
+            precipEl.text("Precipation: " + precip + " mm");
+            $("#weather").append(tempEl);
+            $("#wind").append(windSpeedEl);
+            $("#wind").append(windGustEl);
+            $("#precipation").append(precipEl);
+            // console.log(temp, humidity, windSpeed, windGust, precip);
         });
 };
 
@@ -74,7 +86,7 @@ function apiParkName(stateCode) {
         }).then(function (callData) {
             $('#parkNames option:not(:first)').remove();
             for (let i = 0; i < callData.data.length; i++) {
-                console.log(callData.data[i].fullName);
+                // console.log(callData.data[i].fullName);
                 // append the names to drop down box here
                 let parkNameOption = $("<option>");
                 parkNameOption.text(callData.data[i].fullName);
