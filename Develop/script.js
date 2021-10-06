@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $('#modal1').modal();
     $('#modal1').modal('open');
+    
 });
 
 var modalButton = document.querySelector(".modal-trigger");
@@ -36,10 +37,10 @@ function openWeatherCall(latitude, longitude) {
                 $("#weather").children("li").remove();
             }
             if($("#wind").children("li").length > 0) {
-                $("#wind").chidlren("li").remove();
+                $("#wind").children("li").remove();
             }
             if($("#precip").children("li").length > 0) {
-                $("#precip").children("li").length > 0;
+                $("#precip").children("li").remove();
             }
             let temp = data.current.temp;
             let humidity = data.current.humidity;
@@ -79,7 +80,13 @@ function appendSt() {
         createOption.textContent = stateCodes[i];
         stateDD.append(createOption);
     }
-    stateDD.addEventListener("change", stateHandler);
+    if(stateDD.getAttribute("listener") !== 'true') {
+        // console.log('adding listener');
+        stateDD.addEventListener("change", stateHandler);
+    }else {
+        // console.log("didn't add listener");
+        return;
+    }
 };
 
 function apiParkName(stateCode) {
@@ -96,18 +103,25 @@ function apiParkName(stateCode) {
                 parkNameOption.text(callData.data[i].fullName);
                 parkNameSelect.append(parkNameOption);
             }
-            $(".modal-content").on("click", "#submit", apiCallName);
+            const modalContent = document.querySelector("#submit");
+            if(modalContent.getAttribute("listener") !== 'true') {
+                console.log("adding listener")
+                modalContent.addEventListener("click", apiCallName);
+            }else {
+                return;
+            }
         })
 }
 
 function apiCallName() {
+    console.log("apiCallName being called");
     fetch(nationalParkUrl)
         .then(function (response) {
             return response.json();
         }).then(function (callData) {
-            console.log("fetch call worked");
+            
             let userInput = parkHandler();
-            // console.log(userInput);
+            console.log(userInput);
             console.log(callData.data.length);
             let i = 0;
             for (i; i < callData.data.length; i++) {
@@ -115,6 +129,7 @@ function apiCallName() {
                     break;
                 }
             }
+            $(".parkName").text(userInput);
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
             console.log(image);
             $(".rowBox").css("background-image", "url(" + image + ")");
@@ -145,8 +160,10 @@ function wildfireCall(latitude, longitude) {
         }).then(function (data) {
             console.log(data);
             console.log(data.message);
-            $("#wildFire").empty();
-            $("#wildFire").text("Wildfire");
+            if($("#wildFire").children("li").length > 0) {
+                $("#wildFire").children("li").remove();
+            }
+            // $("#wildFire").text("Wildfire");
             let wildfireEl = $("<li>");
             if (data.message !== "No fires were detected") {
                 wildfireEl.text("Confidence: " + data.data[0].confidence);
@@ -163,6 +180,7 @@ function wildfireCall(latitude, longitude) {
 }
 
 function storeResults(parkName, code) {
+    // console.log(parkName);
     historyResults.push(parkName);
     parkCode.push(code);
     localStorage.setItem("input", JSON.stringify(historyResults));
@@ -171,19 +189,30 @@ function storeResults(parkName, code) {
 }
 
 function getResults() {
+    console.log("history buttons");
     $(".historyBtn").remove();
-    parkCode = JSON.parse(localStorage.getItem("code"));
-    let historySearches = JSON.parse(localStorage.getItem("input"));
-    if (parkCode !== null) {
-        for (let i = 0; i < parkCode.length; i++) {
+    historyResults = JSON.parse(localStorage.getItem("input"));
+    console.log(historyResults);
+    if (historyResults !== null) {
+        for (let i = 0; i < historyResults.length; i++) {
             let historyBtn = $("<button>");
+            let singleParkCode = getParkCode(i);
             historyBtn.attr("class", "historyBtn");
             historyBtn.addClass("submit");
-            historyBtn.attr("id", parkCode[i]);
-            historyBtn.text(historySearches[i]);
+            historyBtn.attr("id", singleParkCode);
+            historyBtn.text(historyResults[i]);
             $(".pastSearches").append(historyBtn);
         }
         $(".historyBtn").on("click", historyHandler);
+    } else {
+        return historyResults = [];
+    }
+}
+
+function getParkCode(i) {
+    parkCode = JSON.parse(localStorage.getItem("code"));
+    if(parkCode !== null) {
+        return parkCode[i];
     } else {
         return parkCode = [];
     }
@@ -214,6 +243,7 @@ function historyFetch(historyUrl) {
                     break;
                 }
             }
+            $(".parkName").text(userInput);
             let image = callData.data[i].images[Math.floor(Math.random() * callData.data[i].images.length)].url;
             $(".rowBox").css("background-image", "url(" + image + ")");
             $(".rowBox").css("position", "relative");
@@ -229,8 +259,9 @@ function historyFetch(historyUrl) {
 
 function parkHandler() {
     let userInput = $("#parkNames option:selected").text();
+    console.log(userInput);
     return userInput;
 }
 
-getResults();
 appendSt();
+getResults();
