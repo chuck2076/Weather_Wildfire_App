@@ -198,7 +198,7 @@ function storeResults(parkName, code) {
 function getResults() {
     $(".historyBtn").remove();
     parkCode = JSON.parse(localStorage.getItem("code"));
-    if (historyResults !== null) {
+    if (parkCode !== null) {
         for (let i = 0; i < parkCode.length; i++) {
             let historyBtn = $("<button>");
             historyBtn.attr("class", "historyBtn");
