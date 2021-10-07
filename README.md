@@ -46,7 +46,8 @@ Developer ideas pending for future deployment:
 <a href="https://www.nps.gov/subjects/developer/guides.htm" target="_blank">National Park API</a>  
 <a href="https://www.getambee.com/api/fire" target="_blank">Fire Rating API</a> \
 JavaScript \
-HTML5 & CSS
+HTML5 & CSS \
+jquery
 
 ---
 
