@@ -1,7 +1,8 @@
 # Weather & Fire Tracker Application
 ---
+Deployable Web Page Link:
 \
-<https://deployedapplicationlink>\
+<https://chuck2076.github.io/Group3_Weather_Wildfire_App/>\
 Version 1.0 \
 Deployment: Oct 6, 2021 \
 Contributors: Ethan Cho, Chuck Stephens, Yafet Amare, James Garinger
@@ -14,20 +15,22 @@ Weather & Fire Tracker is a web application that renders real time data from thr
 # Page Navigation 
 \
 When visiting the page you are presented with imagery of one of the many national parks beautiful trails. Followed by a modal button, with past search history located on a left hand sidebar. 
-![]()
+![Modal Popup](Develop/guide1.png)
 \
 When the modal button is clicked, modal populates the page showing two drop down boxes. The first drop down list shows options to choose your desired state of interest.
-![]()
+![First Dropdown](Develop/guide2.jpg)
 \
 The second dropdown will populate with all national parks in the state you have selected, scroll down if needed and select the nation park of choice.
-![]()
+![Second Dropdown](Develop/guide3.jpg)
 \
-When you have selected a national park, you will want to click on the send button directly below the second dropdown box.
-![]()
+When you have selected a national park, you will want to click on the search button directly below the second dropdown box.
+![Search Selection](Develop/guide4.jpg)
 \
 After clicking send, you will see the most recent data from your chosen location in labeled information boxes on the redirected page. 
-![]()
-
+![Data Boxes](Develop/guide5.jpg)
+\
+If you would like to select a new park after your previous search, you can click the NEW PARK button on the left hand side under the Past Searches bar. After each search, your selection will be added to the past searches history.
+![New Search](Develop/guide6.jpg)
 # Future Development
 Developer ideas pending for future deployment: 
 1) Incorporating nearby activities and events for people traveling to national parks. 
@@ -40,8 +43,8 @@ Developer ideas pending for future deployment:
 
 <a href="https://materializecss.com" target="_blank">MaterializeCSS</a> \
 <a href="https://openweathermap.org/" target="_blank">OpenWeather API</a> \
-<a href="https://openweathermap.org/" target="_blank">National Park API</a>  
-<a href="https://openweathermap.org/" target="_blank">Fire Rating API</a> \
+<a href="https://www.nps.gov/subjects/developer/guides.htm" target="_blank">National Park API</a>  
+<a href="https://www.getambee.com/api/fire" target="_blank">Fire Rating API</a> \
 JavaScript \
 HTML5 & CSS
 

@@ -15,16 +15,15 @@ textarea {
 
 .hero-image {
   display: flex;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  margin-bottom: 10px;
-  height: 500px;
+  padding-top: 4.5em;
+  padding-bottom: 4.5em;
+  margin-bottom: .8em;
+  height: 30rem;
   background: transparent;
   background-image: url("https://i1.wp.com/atascaderonews.com/wp-content/uploads/National-Parks-Service-Yosemite.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  border-radius: 0;
+  background-size:cover;
+  position:relative;
   border-bottom: 2px solid #57504A;
 }
 
@@ -36,7 +35,7 @@ textarea {
   transform: translate(-50%, -50%);
   color: #87adda;
   text-shadow: 3px 3px #57504A;
-  font-size: 60px;
+  font-size: 3em;
 }
 
 /* .modal-trigger{
@@ -142,6 +141,7 @@ h5 {
   margin: 1%;
   height: 15%;
   text-align:center;
+  border-radius:5px;
   
 }
 
@@ -154,3 +154,4 @@ h5 {
 li {
   list-style-type: none;
 }
+
