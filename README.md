@@ -2,7 +2,7 @@
 ---
 Deployable Web Page Link:
 \
-<https://chuck2076.github.io/Group3_Weather_Wildfire_App/>\
+<https://chuck2076.github.io/Weather_Wildfire_App/>\
 Version 1.0 \
 Deployment: Oct 6, 2021 \
 Contributors: Ethan Cho, Chuck Stephens, Yafet Amare, James Garinger
